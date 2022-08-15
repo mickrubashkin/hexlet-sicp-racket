@@ -4,6 +4,8 @@
 
 #lang sicp
 
+(define tolerance 0.00001)
+
 (define (newtons-method g guess)
   (define (fixed-point f first-guess)
   (define (close-enough? v1 v2)
@@ -31,11 +33,13 @@
 
 (define dx 0.00001)
 
-(newtons-method (cubic a b c) 1)
-
 (define (cubic a b c)
   (lambda (x)
     (+ (* x x x)
-       (* a  x x)
+       (* a x x)
        (* b x)
        c)))
+
+; (newtons-method (cubic a b c) 1)
+(newtons-method (cubic 3 2 1) 1)
+; x^3 + 3x^2 + 2x + 1 => -2.3247179572447276
