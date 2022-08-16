@@ -5,21 +5,28 @@
 
 #lang sicp
 
+(#%require rackunit)
+
 (define (cons x y) 
   (lambda (m) (m x y)))
 
-(define (car z) 
+(define (car z)
   (z (lambda (p q) p)))
 
 ; Lets use the substitution model
-(car z)
+; (car z)
 ; car => (z (lambda (p q) p))
 ; z => (lambda (m) (m x y))
-((lambda (m) (m x y))
-  (lambda (p q) p))
-
-((lambda (p q) p) x y) ; => x
+; ((lambda (m) (m x y))
+  ; (lambda (p q) p))
+; ((lambda (p q) p) x y) ; => x
 
 ; The corresponding definition of cdr.
 (define (cdr z)
   (z (lambda (p q) q)))
+
+; Test
+(define pair (cons 1 2)) ; (1 . 2)
+
+(check-equal? (car pair) 1)
+(check-equal? (cdr pair) 2)
