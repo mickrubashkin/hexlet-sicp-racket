@@ -10,7 +10,7 @@
 
 ; Rect geometry params calc.
 (define (perimeter rect)
-  (* 2 (+ ((horiz-rect rect) (vert-rect rect)))))
+  (* 2 (+ (horiz-rect rect) (vert-rect rect))))
 
 (define (area rect)
   (* (horiz-rect rect) (vert-rect rect)))
@@ -25,11 +25,11 @@
 (define (horiz-rect rect)
   (car (cdr rect)))
 
-(define (vert-rect)
+(define (vert-rect rect)
   (cdr (cdr rect)))
 
 ; Rectangles data abstraction. V2.
-(define (make-rect left-top right-bottom)
+(define (make-rect-v2 left-top right-bottom)
   (cons left-top right-bottom))
 
 (define (left-top-rect rect)
@@ -43,15 +43,15 @@
     (x-point (right-bottom-rect rect))
     (y-point (left-top-rect rect))))
 
-(define (horiz-rect rect)
+(define (horiz-rect-v2 rect)
   (make-segment
     (left-top-rect rect)
     (right-top-rect rect)))
 
-(define (vert-rect rect)
+(define (vert-rect-v2 rect)
   (make-segment
     (right-top-rect rect)
-    (righ-right-bottom-rect rect)))
+    (right-bottom-rect rect)))
 
 ; Segment data abstraction.
 (define (make-segment point-start point-end)
@@ -99,3 +99,16 @@
   (display ",")
   (display (y-point p))
   (display ")"))
+
+; Make origin, horiz, vert
+; Make rect (o, h, v)
+; Calc rect area and perimeter
+
+(define o
+  (make-point 0 3))
+
+(define r
+  (make-rect o 4 3))
+
+(perimeter r) ;=> 14
+(area r) ; => 12

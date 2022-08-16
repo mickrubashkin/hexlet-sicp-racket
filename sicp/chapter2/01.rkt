@@ -23,7 +23,8 @@
   (newline)
   (display (numer x))
   (display "/")
-  (display (denom x)))
+  (display (denom x))
+  (newline))
 
 (print-rat (make-rat -1 2)) ; => -1/2
 (print-rat (make-rat 1 -2)) ; => -1/2
